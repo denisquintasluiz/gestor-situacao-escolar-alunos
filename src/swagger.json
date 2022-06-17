@@ -1,0 +1,358 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Webservice para  fiscalização dos alunos da USTP",
+        "description": "Esse Webservice tem como principal objetivo auxiliar no processo de fiscalização da situação escolar dos alunos da USTP",
+        "termsOfService": "http://localhost:2022",
+        "contact": {
+            "email": "dennysluizquintas991@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+        "url": "http://localhost:2022",
+        "description": "API de desenvolvimento"
+        },
+        {
+         "url": "https://situacao-escolar-ustp.herokuapp.com/",
+         "description":"API de produção"
+        }
+    ],
+    "paths": {
+        "/{api_key}/webservice/fiscalizacao": {
+            "post": {
+                "summary": "Registro de um aluno",
+                "description": "Essa rota serve para registrar um novo aluno",
+                "tags": ["Alunos"],
+                "security": [{"bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "description":"Chave de acesso ao serviço",
+                        "required": true
+                    }
+                ],  
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Aluno"
+                            },
+                            "examples": {
+                               "aluno": {
+                                 "value": {
+                                    "nome": "Denis",
+                                    "apelido": "Quintas Luiz",
+                                    "zona": "São Gabriel",
+                                    "anoescolar": 4,
+                                    "turma": "C6",
+                                    "idade": 24,
+                                    "curso": "Engenharia Informática",
+                                    "departamento": "Ciências Exatas",
+                                    "polouniversitario": "FCT",
+                                    "periodoestudo": "Tarde",
+                                    "foto": "Sem foto",
+                                    "numerocadeiraematraso": 0,
+                                    "codigoescolar": 4869,
+                                    "email": "dennysluizquintas991@hotmail.com",
+                                    "distrito": "Água Grande",
+                                    "maiornotapauta": 18,
+                                    "menornotapauta": 12   
+                                 }
+                               } 
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                      "description": "Unauthorized"  
+                    },
+                    "500": {
+                      "description": "Falha Interna"
+                    },
+                    "201": {
+                      "description": "Ok",
+                      "content": {
+                          "application/json":{
+                              "schema":{
+                                 "type":"object",
+                                 "$ref":"#/components/schemas/Aluno" 
+                              }
+                          }
+                      }  
+                    }
+                }
+            },
+            "get": {
+              "summary": "Faz a listagem dos alunos",
+               "description": "Essa rota serve para listar todos os alunos registrados",
+               "tags": ["Alunos"],
+               "parameters": [
+                {
+                    "name": "api_key",
+                    "in": "path",
+                    "description":"Chave de acesso ao serviço",
+                    "required": true
+                }
+            ],  
+               "responses": {
+                   "200": {
+                      "description": "OK",
+                      "content": {
+                        "application/json":{
+                           "schema": {
+                               "type": "array",
+                               "items": {
+                                   "$ref":"#/components/schemas/Aluno"
+                               }
+                           } 
+                        }  
+                      } 
+                   }
+               }
+            }
+        },
+        "/{api_key}/webservice/fiscalizacao/alunos/{codigoescolar}":{
+         "get": {
+            "description": "Faz a busca de um aluno pelo seu codigo escolar",
+            "summary": "Rota que efetua a busca de um aluno com base no seu codigo escolar",
+            "tags": ["Alunos"],
+            "parameters": [
+                {
+                    "name": "codigoescolar",
+                    "in": "path",
+                    "description":"Codigo escolar para o filtro da busca",
+                    "required": true
+                },
+                {
+                    "name": "api_key",
+                    "in": "path",
+                    "description":"chave de acesso ao serviço",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/Aluno"
+                          }
+                      }
+                  }
+                }
+            }
+         }
+        },
+        "/{api_key}/webservice/fiscalizacao/{id}":{
+          "put":{
+            "summary": "Faz atualização de um aluno pelo seu Id",
+            "description": "Essa rota serve para fazer a atualização um aluno com base no seu Id",
+            "tags": ["Alunos"],
+            "security": [{"bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description":"id para o filtro da busca",
+                    "required": true
+                },
+                {
+                    "name": "api_key",
+                    "in": "path",
+                    "description":"chave de acesso ao serviço",
+                    "required": true
+                }
+            ],
+            "requestBody":{
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Aluno"
+                        },
+                        "examples": {
+                           "aluno": {
+                             "value": {
+                                "nome": "Malefico",
+                                "apelido": "SN",
+                                "zona": "Estados Unidos",
+                                "anoescolar": 2,
+                                "turma": "UTF-8",
+                                "idade": 30,
+                                "curso": "Computação Quantica",
+                                "departamento": "Ciências Aplicadas",
+                                "polouniversitario": "AI",
+                                "periodoestudo": "Noite",
+                                "foto": "Sem nenhuma Informação",
+                                "numerocadeiraematraso": 0,
+                                "codigoescolar": 2050,
+                                "email": "rapper-dev@gmail.com",
+                                "distrito": "West California",
+                                "maiornotapauta": 20,
+                                "menornotapauta": 19   
+                             }
+                           } 
+                        }
+                    }
+                }   
+            },
+            "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/Aluno"
+                          }
+                      }
+                  }
+                }
+            }
+          },
+          "get": {
+            "description": "Faz a busca de um aluno pelo seu Id",
+            "summary": "Rota que efetua a busca de um aluno com base no seu Id",
+            "tags": ["Alunos"],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description":"Id para o filtro da busca",
+                    "required": true
+                },
+                {
+                    "name": "api_key",
+                    "in": "path",
+                    "description":"chave de acesso ao serviço",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/Aluno"
+                          }
+                      }
+                  }
+                }
+            }
+         },
+         "delete": {
+            "description": "Deleta um aluno pelo seu Id",
+            "summary": "Rota que deleta  um aluno com base no seu Id",
+            "tags": ["Alunos"],
+            "security": [{"bearerAuth": [] }],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description":"Id para o filtro da busca",
+                    "required": true
+                },
+                {
+                    "name": "api_key",
+                    "in": "path",
+                    "description":"chave de acesso ao serviço",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/Aluno"
+                          }
+                      }
+                  }
+                }
+            }
+         }
+
+        }
+
+    },
+    "components": {
+      "schemas": {
+          "Aluno": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                    "type": "string"
+                },
+                "apelido": {
+                    "type": "string"
+                },
+                "zona": {
+                    "type": "string"
+                },
+                "anoescolar": {
+                    "type": "number"
+                },
+                "turma": {
+                    "type": "string"
+                },
+                "idade": {
+                    "type": "number"
+                },
+                "curso": {
+                    "type": "string"
+                },
+                "departamento": {
+                    "type": "string"
+                },
+                "polouniversitario": {
+                    "type": "string"
+                },
+                "periodoestudo": {
+                    "type": "string"
+                },
+                "foto": {
+                    "type": "string"
+                },
+                "numerocadeiraematraso": {
+                    "type": "number"
+                },
+                "codigoescolar": {
+                    "type":"number"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "distrito": {
+                    "type": "string"
+                },
+                "maiornotapauta": {
+                    "type": "number"
+                },
+                "menornotapauta": {
+                    "type":"number"
+                }   
+              }
+          }
+      },
+      "securitySchemes": {
+         "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+         } 
+      }
+
+    }
+
+
+    
+}
