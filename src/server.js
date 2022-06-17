@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 //conectando a base de dados
 mongoose.Promise = global.Promise;
- if(process.env.NODE_ENV == "producao"){
+ if(process.env.NODE_ENV == "production"){
      mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
      console.log(`MongoDB conetado com sucesso na URL:${process.env.MONGODB_URI}`)
