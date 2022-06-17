@@ -60,6 +60,6 @@ mongoose.Promise = global.Promise;
      app.use(router);
 
 //definindo a porta de disponibilidade do serviço
-app.listen(process.env.PORTA, () => {
+app.listen(process.env.PORTA || process.env.PORT, () => {
     console.log(`Servidor está rodando na url:localhost:${process.env.PORTA}`);
 });
