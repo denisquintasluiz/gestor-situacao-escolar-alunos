@@ -2,6 +2,7 @@
 const mongoose = require("mongoose")
 //fazendo com que o ficheiro tenha a referencia do model Aluno
 require("../model/Aluno");
+
 //definindo o ducumento da collecton alunos
 const collAluno = mongoose.model("alunos");
 
