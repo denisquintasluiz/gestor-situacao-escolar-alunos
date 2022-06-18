@@ -3,7 +3,7 @@
     "info": {
         "title": "Webservice para  fiscalização dos alunos da USTP",
         "description": "Esse Webservice tem como principal objetivo auxiliar no processo de fiscalização da situação escolar dos alunos da USTP",
-        "termsOfService": "http://localhost:2022",
+        "termsOfService": "https://gestor-situacao-escolar-alunos.herokuapp.com/",
         "contact": {
             "email": "dennysluizquintas991@hotmail.com"
         },
