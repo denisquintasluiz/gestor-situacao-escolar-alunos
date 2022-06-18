@@ -12,16 +12,16 @@ const {checkPermission} = require("./config/auth");
 router.get("/", AlunoController.welcome)
 
 //rota que cria um aluno na collection alunos
-router.post("/:api_key/webservice/fiscalizacao", AlunoController.create)
+router.post("/:api_key/webservice/fiscalizacao", checkPermission, AlunoController.create)
 
 // rota que faz o Update dos Alunos
-router.put("/:api_key/webservice/fiscalizacao/:id", AlunoController.update)
+router.put("/:api_key/webservice/fiscalizacao/:id", checkPermission, AlunoController.update)
 
 //rota que faz a listagem dos alunos registados
 router.get("/:api_key/webservice/fiscalizacao", AlunoController.readAll)
 
 //rota que apaga um Aluno
-router.delete("/:api_key/webservice/fiscalizacao/:id", AlunoController.delete)
+router.delete("/:api_key/webservice/fiscalizacao/:id", checkPermission, AlunoController.delete)
 
 //rota que faz o select do aluno pelo seu Id
 router.get("/:api_key/webservice/fiscalizacao/:id", AlunoController.read)
