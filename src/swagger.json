@@ -15,7 +15,7 @@
         "description": "API de desenvolvimento"
         },
         {
-         "url": "https://situacao-escolar-ustp.herokuapp.com/",
+         "url": "https://gestor-situacao-escolar-alunos.herokuapp.com/",
          "description":"API de produção"
         }
     ],
