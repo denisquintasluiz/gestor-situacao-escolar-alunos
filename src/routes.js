@@ -6,31 +6,33 @@ const router = express.Router();
 const AlunoController = require("./controller/AlunoControllers");
 //importando o auth
 const {checkPermission} = require("./config/auth");
+//verificando a autoridade dos clientes
+const {hasPermission} = require("./config/verifyPermission")
 
  //CRIANDO ROTAS
 //rota raiz do webservice
 router.get("/", AlunoController.welcome)
 
 //rota que cria um aluno na collection alunos
-router.post("/:api_key/webservice/fiscalizacao", checkPermission, AlunoController.create)
+router.post("/webservice/fiscalizacao", hasPermission, AlunoController.create)
 
 // rota que faz o Update dos Alunos
-router.put("/:api_key/webservice/fiscalizacao/:id", checkPermission, AlunoController.update)
+router.put("/webservice/fiscalizacao/:id", hasPermission, AlunoController.update)
 
 //rota que faz a listagem dos alunos registados
-router.get("/:api_key/webservice/fiscalizacao", AlunoController.readAll)
+router.get("/webservice/fiscalizacao", AlunoController.readAll)
 
 //rota que apaga um Aluno
-router.delete("/:api_key/webservice/fiscalizacao/:id", checkPermission, AlunoController.delete)
+router.delete("/webservice/fiscalizacao/:id", hasPermission, AlunoController.delete)
 
 //rota que faz o select do aluno pelo seu Id
-router.get("/:api_key/webservice/fiscalizacao/:id", AlunoController.read)
+router.get("/webservice/fiscalizacao/:id", AlunoController.read)
 
 /*rota que disponibiliza o recurso para o uso público
   * faz o select do aluno pelo seu codigo escolar
   *
 */
-router.get("/:api_key/webservice/fiscalizacao/alunos/:codigoescolar", AlunoController.readByCodEscolar)
+router.get("/webservice/fiscalizacao/alunos/:codigoescolar", AlunoController.readByCodEscolar)
 
 
 //exportando o modelo 
