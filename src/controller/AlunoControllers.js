@@ -13,7 +13,7 @@ async welcome(req, res){
     res.status(200).json({
         "mensagem": "Olá, Seja Bem vindo ao meu Webservice!",
         "usabilidade": "Para usufruir deste serviço acrecente no endereço da pagina web o caminho abaixo:",
-        "urlServico": "/:api_key/webservice/fiscalizacao/alunos/:codigoescolar(4869, este seria um exemplo)",
+        "urlServico": "/webservice/fiscalizacao/alunos/:codigoescolar(4869, este seria um exemplo)",
         "Documentação-Webservice": "/webservice-docs"
     })
 }, 
